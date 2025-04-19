@@ -1,0 +1,17 @@
+{
+    "godotTools.editorPath.godot4": "${workspaceFolder}/godot/bin/godot.linuxbsd.editor.x86_64",
+    "cmake.ignoreCMakeListsMissing": true,
+    "cSpell.words": [
+        "AABB",
+        "elif",
+        "heightmap",
+        "lerp",
+        "lods",
+        "multimesh",
+        "Octree",
+        "onready",
+        "perlin",
+        "texel"
+    ],
+    "editor.insertSpaces": false
+}

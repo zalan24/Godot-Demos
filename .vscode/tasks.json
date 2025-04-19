@@ -1,0 +1,41 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Godot",
+            "type": "shell",
+            "options": {"cwd": "godot"},
+            // "runOptions": {},
+            "command": "scons",
+            "linux": {
+                "args": [
+                    "platform=linux",
+                    "target=editor",
+                    "compiledb=yes"
+                    // "dev_build=yes"
+                ]
+            },
+            "windows": {
+                "args": [
+                    "platform=windows",
+                    "target=editor",
+                    "compiledb=yes"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "platform=macos",
+                    "arch=arm64",
+                    "target=editor",
+                    "compiledb=yes"
+                ]
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+            }
+        },
+    ]
+}

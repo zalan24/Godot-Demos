@@ -1,0 +1,71 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/godot/platform/linuxbsd"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "TOOLS_ENABLED",
+                "DEBUG_ENABLED",
+                "TESTS_ENABLED"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": [
+                "godot/compile_commands.json"
+            ]
+        },
+        {
+            "name": "MacOS arm64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/godot/platform/"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "TOOLS_ENABLED",
+                "DEBUG_ENABLED",
+                "TESTS_ENABLED"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-arm64",
+            "compileCommands": [
+                "godot/compile_commands.json"
+            ]
+        },
+        {
+            "name": "Win64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/godot/platform/"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "TOOLS_ENABLED",
+                "DEBUG_ENABLED",
+                "TESTS_ENABLED"
+            ],
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "compileCommands": [
+                "godot/compile_commands.json"
+            ]
+        }
+    ],
+    "version": 4
+}

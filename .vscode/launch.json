@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Play Current Scene",
+            "type": "godot",
+            "request": "launch",
+            "scene": "current",
+            "project": "${workspaceFolder}/test-content",
+            "additional_options": ""
+        },
+        {
+            "name": "Play Pinned Scene",
+            "type": "godot",
+            "request": "launch",
+            "scene": "pinned",
+            "project": "${workspaceFolder}/test-content",
+            "additional_options": ""
+        },
+        {
+            "name": "Launch Project",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}/test-content",
+            "debug_collisions": false,
+            "debug_paths": false,
+            "debug_navigation": false,
+            "additional_options": ""
+        }
+    ]
+}
