@@ -1,3 +1,4 @@
 [submodule "godot"]
 	path = godot
 	url = https://github.com/zalan24/godot
+	branch = feature-exp-height-fog
