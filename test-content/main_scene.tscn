@@ -1,6 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cpbm1847701pb"]
 
 [ext_resource type="PackedScene" uid="uid://66c73hrdbstt" path="res://FreeCamera/free_camera.tscn" id="1_0f027"]
+[ext_resource type="Material" uid="uid://c42xia0d58ydg" path="res://terrain_material.tres" id="2_2c62f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o3jxj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -14,22 +15,19 @@ background_mode = 2
 sky = SubResource("Sky_0f027")
 tonemap_mode = 2
 glow_enabled = true
-fog_enabled = true
 fog_density = 0.0
 fog_height = 42.37
 fog_height_density = 0.1
-
-[sub_resource type="BoxMesh" id="BoxMesh_o3jxj"]
-size = Vector3(1000, 5, 1000)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_o3jxj"]
-size = Vector3(1000, 5, 1000)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0f027"]
 size = Vector3(5, 100, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2c62f"]
 size = Vector3(5, 100, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0f027"]
+subdivide_width = 1000
+subdivide_depth = 1000
 
 [node name="World" type="Node3D"]
 
@@ -46,15 +44,6 @@ transform = Transform3D(-0.727005, -0.656955, 0.199688, 0.47951, -0.277603, 0.83
 shadow_enabled = true
 
 [node name="StaticObjects" type="Node3D" parent="."]
-
-[node name="Platform" type="StaticBody3D" parent="StaticObjects"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Platform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.73473, 0)
-mesh = SubResource("BoxMesh_o3jxj")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Platform"]
-shape = SubResource("BoxShape3D_o3jxj")
 
 [node name="Obstacles" type="Node3D" parent="StaticObjects"]
 
@@ -206,3 +195,9 @@ skeleton = NodePath("../../Column2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column15"]
 shape = SubResource("BoxShape3D_2c62f")
+
+[node name="Terrain" type="MeshInstance3D" parent="StaticObjects"]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0, 0)
+material_override = ExtResource("2_2c62f")
+custom_aabb = AABB(-1, 0, -1, 2, 500, 2)
+mesh = SubResource("PlaneMesh_0f027")

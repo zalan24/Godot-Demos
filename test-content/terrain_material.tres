@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c42xia0d58ydg"]
+
+[ext_resource type="Shader" uid="uid://ctelbtq2xeqdr" path="res://terrain.gdshader" id="1_2k1ma"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2k1ma"]
+noise_type = 3
+seed = 4
+offset = Vector3(534.88, -1000, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ehmtg"]
+noise = SubResource("FastNoiseLite_2k1ma")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2k1ma")
+shader_parameter/perlin_noise_0 = SubResource("NoiseTexture2D_ehmtg")
+shader_parameter/perlin_noise_0_scale = 100.0
