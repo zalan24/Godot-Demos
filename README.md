@@ -51,7 +51,10 @@ Where *base_height* is a parameter of the fog, a reference height to offset the 
 1 unit of *density* reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
 
 The distribution of density along the view ray is not important, only the total density (the integral) is.
-
+```math
+Does this work???
+fog\_transparency(pos, dir, L) = exp(-\int_0^L fog\_density\left(pos+dir*t\right) \,dt) =
+```
 $$fog\_transparency(pos, dir, L) = exp(-\int_0^L fog\_density\left(pos+dir*t\right) \,dt) =$$
 $$exp(-\int_0^L e^{-(pos_y+dir_y*t-base\_height)*height\_falloff}*base\_fog\_density \,dt) =$$
 $$exp(-base\_fog\_density * \int_0^L e^{(base\_height-pos_y-dir_y*t)*height\_falloff} \,dt) =$$
