@@ -1,17 +1,35 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c42xia0d58ydg"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c42xia0d58ydg"]
 
 [ext_resource type="Shader" uid="uid://ctelbtq2xeqdr" path="res://terrain.gdshader" id="1_2k1ma"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2k1ma"]
 noise_type = 3
-seed = 4
-offset = Vector3(534.88, -1000, 0)
+seed = 20
+frequency = 0.0099
+offset = Vector3(29.44, -1000, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ehmtg"]
+width = 256
+height = 256
 noise = SubResource("FastNoiseLite_2k1ma")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ehmtg"]
+noise_type = 3
+seed = 4
+frequency = 0.0259
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2k1ma"]
+noise = SubResource("FastNoiseLite_ehmtg")
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_2k1ma")
+shader_parameter/world_size = Vector2(4000, 4000)
 shader_parameter/perlin_noise_0 = SubResource("NoiseTexture2D_ehmtg")
-shader_parameter/perlin_noise_0_scale = 100.0
+shader_parameter/perlin_noise_0_scale = 300.0
+shader_parameter/perlin_noise_1 = SubResource("NoiseTexture2D_2k1ma")
+shader_parameter/perlin_noise_1_scale = 50.0
+shader_parameter/water_level = 100.0
+shader_parameter/grass_color = Color(0.156863, 0.611765, 0.203922, 1)
+shader_parameter/water_color = Color(0, 0.254902, 1, 1)
+shader_parameter/rock_color = Color(0.501961, 0.403922, 0.501961, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpbm1847701pb"]
+[gd_scene load_steps=7 format=3 uid="uid://cpbm1847701pb"]
 
 [ext_resource type="PackedScene" uid="uid://66c73hrdbstt" path="res://FreeCamera/free_camera.tscn" id="1_0f027"]
 [ext_resource type="Material" uid="uid://c42xia0d58ydg" path="res://terrain_material.tres" id="2_2c62f"]
@@ -19,12 +19,6 @@ fog_density = 0.0
 fog_height = 42.37
 fog_height_density = 0.1
 
-[sub_resource type="BoxMesh" id="BoxMesh_0f027"]
-size = Vector3(5, 100, 5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2c62f"]
-size = Vector3(5, 100, 5)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_0f027"]
 subdivide_width = 1000
 subdivide_depth = 1000
@@ -40,164 +34,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.11972, 8.38996)
 environment = SubResource("Environment_2c62f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(-0.727005, -0.656955, 0.199688, 0.47951, -0.277603, 0.83247, -0.491461, 0.700962, 0.516835, 0, 10.6583, 0)
+transform = Transform3D(-0.212241, -0.972491, -0.0959919, 0.855012, -0.232366, 0.463639, -0.47319, 0.0163289, 0.880809, 0, 10.6583, 0)
 shadow_enabled = true
 
 [node name="StaticObjects" type="Node3D" parent="."]
 
-[node name="Obstacles" type="Node3D" parent="StaticObjects"]
-
-[node name="Column" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.7492, -22.9749)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column"]
-mesh = SubResource("BoxMesh_0f027")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column2" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.50333, 48.7492, -45.9499)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column2"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column2"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column3" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2001, 48.7492, -73.1268)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column3"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column3"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column4" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8684, 48.7492, -103.373)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column4"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column4"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column5" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.2068, 48.7492, -147.676)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column5"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column5"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column6" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3738, 48.7492, -204.439)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column6"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column6"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column7" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.4226, 48.7492, -250.304)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column7"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column7"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column8" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.3482, 48.7492, -246.609)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column8"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column8"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column9" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5045, 48.7492, -316.474)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column9"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column9"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column10" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08573, 48.7492, -373.043)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column10"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column10"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column11" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.7337, 48.7492, -436.531)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column11"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column11"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column12" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.4214, 48.7492, -485.659)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column12"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column12"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column13" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1849, 48.7492, -155.595)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column13"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column13"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column14" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.9438, 48.7492, -218.01)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column14"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column14"]
-shape = SubResource("BoxShape3D_2c62f")
-
-[node name="Column15" type="StaticBody3D" parent="StaticObjects/Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13106, 48.7492, -296.683)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Obstacles/Column15"]
-mesh = SubResource("BoxMesh_0f027")
-skeleton = NodePath("../../Column2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column15"]
-shape = SubResource("BoxShape3D_2c62f")
-
 [node name="Terrain" type="MeshInstance3D" parent="StaticObjects"]
-transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0, 0)
+transform = Transform3D(2000, 0, 0, 0, 1, 0, 0, 0, 2000, 0, 0, 0)
 material_override = ExtResource("2_2c62f")
 custom_aabb = AABB(-1, 0, -1, 2, 500, 2)
 mesh = SubResource("PlaneMesh_0f027")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.749938, 0, 0.661508, 0, 1, 0, -0.661508, 0, -0.749938, 997.615, 318.097, -1435)
+current = true

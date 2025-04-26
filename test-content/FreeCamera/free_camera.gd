@@ -17,11 +17,11 @@ func _exit_tree():
 
 func activate_control():
 	super()
-	# camera.make_current()
+	camera.make_current()
 
 func deactivate_control():
 	super()
-	# camera.clear_current()
+	camera.clear_current()
 
 func _toggle_controls():
 	if has_controller():
