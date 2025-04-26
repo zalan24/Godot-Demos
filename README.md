@@ -8,5 +8,6 @@ My godot-fork: https://github.com/zalan24/godot/
 
 ### Exponential height fog
 
-Demo: https://github.com/zalan24/Godot-Demos/tree/exp-height-fog\
+Demo: https://github.com/zalan24/Godot-Demos/tree/exp-height-fog
+
 Implementation: https://github.com/zalan24/godot/tree/feature-exp-height-fog
