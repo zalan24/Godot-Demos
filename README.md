@@ -7,7 +7,9 @@ The implementation can be found on my Godot-fork as a feature branch: https://gi
 It's a simple type of fog, where the density is calculated based on world-y position. As we move up along the Y (up) axis, the fog exponentially gets lower. It resembles how the atmosphere's density decreases.
 
 Simplified density model:
-$$simple\_fog\_density\left(pos\right) = e^{-pos_y}*base\_fog\_density$$
+```math
+simple\_fog\_density\left(pos\right) = e^{-pos_y}*base\_fog\_density
+```
 
 It is a very useful and simple tool, which can achieve really nice results at a very low performance cost.
 
@@ -51,16 +53,25 @@ Where *base_height* is a parameter of the fog, a reference height to offset the 
 1 unit of *density* reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
 
 The distribution of density along the view ray is not important, only the total density (the integral) is.
+
 ```math
-Does this work???
 fog\_transparency(pos, dir, L) = exp(-\int_0^L fog\_density\left(pos+dir*t\right) \,dt) =
 ```
-$$fog\_transparency(pos, dir, L) = exp(-\int_0^L fog\_density\left(pos+dir*t\right) \,dt) =$$
-$$exp(-\int_0^L e^{-(pos_y+dir_y*t-base\_height)*height\_falloff}*base\_fog\_density \,dt) =$$
-$$exp(-base\_fog\_density * \int_0^L e^{(base\_height-pos_y-dir_y*t)*height\_falloff} \,dt) =$$
-$$exp(-base\_fog\_density * (-\frac{e^{(base\_height-pos_y-dir_y*L)*height\_falloff}}{dir_y*height\_falloff} + \frac{e^{(base\_height-pos_y-dir_y*0)*height\_falloff}}{dir_y*height\_falloff})) =$$
-$$exp(-base\_fog\_density * (\frac{e^{(base\_height-pos_y-dir_y*0)*height\_falloff} - e^{(base\_height-pos_y-dir_y*L)*height\_falloff}}{dir_y*height\_falloff})) =$$
-$$exp(-base\_fog\_density * (\frac{e^{(base\_height-pos_y)*height\_falloff} - e^{(base\_height-pos_y-dir_y*L)*height\_falloff}}{dir_y*height\_falloff})) =$$
+```math
+exp(-\int_0^L e^{-(pos_y+dir_y*t-base\_height)*height\_falloff}*base\_fog\_density \,dt) =
+```
+```math
+exp(-base\_fog\_density * \int_0^L e^{(base\_height-pos_y-dir_y*t)*height\_falloff} \,dt) =
+```
+```math
+exp(-base\_fog\_density * (-\frac{e^{(base\_height-pos_y-dir_y*L)*height\_falloff}}{dir_y*height\_falloff} + \frac{e^{(base\_height-pos_y-dir_y*0)*height\_falloff}}{dir_y*height\_falloff})) =
+```
+```math
+exp(-base\_fog\_density * (\frac{e^{(base\_height-pos_y-dir_y*0)*height\_falloff} - e^{(base\_height-pos_y-dir_y*L)*height\_falloff}}{dir_y*height\_falloff})) =
+```
+```math
+exp(-base\_fog\_density * (\frac{e^{(base\_height-pos_y)*height\_falloff} - e^{(base\_height-pos_y-dir_y*L)*height\_falloff}}{dir_y*height\_falloff})) =
+```
 
 Where *pos* is the the origin of the view ray; *dir* is the view ray's normalized direction; and *L* is the view ray's length.
 
