@@ -46,33 +46,33 @@ The solution that I present here is very similar to how [Unreal Engine does it f
 ## Math
 
 Full fog density:
-$$fog\_density\left(pos\right) = e^{-(pos_y-base\_height)*h\_falloff}*base\_density$$
+$$fog\_density\left(p\right) = e^{-(p_y-base\_height)*h\_falloff}*base\_density$$
 
-Where *base_height* is a parameter of the fog, a reference height to offset the fog along Y; *h_falloff* is a parameter that changes how quickly the density changes as we move along Y; *base_density* determines the density at the *base_height*.
+Where *p* is the world-space position; *base_height* is a parameter of the fog, a reference height to offset the fog along Y; *h_falloff* is a parameter that changes how quickly the density changes as we move along Y; *base_density* determines the density at the *base_height*.
 
 1 unit of *density* reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
 
 The distribution of density along the view ray is not important, only the total density (the integral) is.
 
 ```math
-fog\_transparency(pos, dir, L) = exp(-\int_0^L fog\_density\left(pos+dir*t\right) \,dt) =
+fog\_transparency(o, v, L) = exp(-\int_0^L fog\_density\left(o+v*t\right) \,dt) =
 ```
 ```math
-exp(-\int_0^L e^{-(pos_y+dir_y*t-base\_height)*h\_falloff}*base\_density \,dt) =
+exp(-\int_0^L e^{-(o_y+v_y*t-base\_height)*h\_falloff}*base\_density \,dt) =
 ```
 ```math
-exp(-base\_density * \int_0^L e^{(base\_height-pos_y-dir_y*t)*h\_falloff} \,dt) =
+exp(-base\_density * \int_0^L e^{(base\_height-o_y-v_y*t)*h\_falloff} \,dt) =
 ```
 ```math
-exp(-base\_density * (-\frac{e^{(base\_height-pos_y-dir_y*L)*h\_falloff}}{dir_y*h\_falloff} + \frac{e^{(base\_height-pos_y-dir_y*0)*h\_falloff}}{dir_y*h\_falloff})) =
+exp(-base\_density * (-\frac{e^{(base\_height-o_y-v_y*L)*h\_falloff}}{v_y*h\_falloff} + \frac{e^{(base\_height-o_y-v_y*0)*h\_falloff}}{v_y*h\_falloff})) =
 ```
 ```math
-exp(-base\_density * (\frac{e^{(base\_height-pos_y-dir_y*0)*h\_falloff} - e^{(base\_height-pos_y-dir_y*L)*h\_falloff}}{dir_y*h\_falloff})) =
+exp(-base\_density * (\frac{e^{(base\_height-o_y-v_y*0)*h\_falloff} - e^{(base\_height-o_y-v_y*L)*h\_falloff}}{v_y*h\_falloff})) =
 ```
 ```math
-exp(-base\_density * (\frac{e^{(base\_height-pos_y)*h\_falloff} - e^{(base\_height-pos_y-dir_y*L)*h\_falloff}}{dir_y*h\_falloff})) =
+exp(-base\_density * (\frac{e^{(base\_height-o_y)*h\_falloff} - e^{(base\_height-o_y-v_y*L)*h\_falloff}}{v_y*h\_falloff}))
 ```
 
-Where *pos* is the the origin of the view ray; *dir* is the view ray's normalized direction; and *L* is the view ray's length.
+Where *o* is the the origin of the view ray; *v* is the view ray's normalized direction; and *L* is the view ray's length.
 
-The above expression can be used if the *dir.y* value is not zero. If it is, meaning that the view ray is horizontal, the fog density is constant over distance, so the simple exponential fog formula can be used (already implemented in Godot).
+The above expression can be used if the *v.y* value is not zero. If it is, meaning that the view ray is horizontal, the fog density is constant over distance, so the simple exponential fog formula can be used (already implemented in Godot).
