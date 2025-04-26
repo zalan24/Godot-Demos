@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode world_vertex_coords;
 
 uniform vec2 world_size = vec2(2000, 2000);
-uniform sampler2D perlin_noise_0;
+uniform sampler2D perlin_noise_0 : repeat_disable, filter_linear;
 uniform float perlin_noise_0_scale = 1;
 
 float get_height_at(vec2 uv)
