@@ -37,9 +37,9 @@ Missing:
 
 ## Why This Change?
 
-Godot does have a built in exp height fog already, but it works in a different way. The existing solution computes the strength of the fog on a given pixel based on the world-y position of that pixel. It's completely independent of the pixel's distance from the camera or the direction of the view ray. This solution doesn't seem useful to me.
+Godot does have a built in exp height fog already, but it works in a different way. The existing solution computes the strength of the fog on a given pixel based on the world-y position of that pixel. It's completely independent of the pixel's distance from the camera or the direction of the view ray. This solution looks surprisingly well when looked at from above, but falls apart as the camera enters the fog.
 
-In a nutshell, the built-in solution uses the fog density at a pixel's world position directly as the fog strength applied to that pixel on the screen. My solution simply integrates the fog density along the ray between the camera and the pixel's world position to calculate the fog strength.
+In a nutshell, the built-in solution uses the fog density at a pixel's world position directly as the fog strength applied to that pixel on the screen. My solution simply integrates the fog density along the ray between the camera and the pixel's world position to calculate the fog strength. This way, the fog gets stronger with distance.
 
 The solution that I present here is very similar to how [Unreal Engine does it for example](https://dev.epicgames.com/documentation/en-us/unreal-engine/exponential-height-fog-user-guide?application_version=4.27).
 
@@ -76,3 +76,65 @@ exp(-base\_density * (\frac{e^{(base\_height-o_y)*h\_falloff} - e^{(base\_height
 Where *o* is the the origin of the view ray; *v* is the view ray's normalized direction; and *L* is the view ray's length.
 
 The above expression can be used if the *v.y* value is not zero. If it is, meaning that the view ray is horizontal, the fog density is constant over distance, so the simple exponential fog formula can be used (already implemented in Godot).
+
+## Screenshots
+
+### From Above
+
+#### No Fog
+![Screenshot from above, No fog](screenshots/no_fog.webp)
+#### Original Fog
+![Screenshot from above, Old fog](screenshots/old_fog.webp)
+#### Proposed Implementation
+![Screenshot from above, New fog](screenshots/new_fog.webp)
+
+#### Notes
+
+The terrain close to the camera receives low amount of fog in both cases, so the difference is not apparent.
+
+The fog's effect on the sky is very different. Both option use full sky effect, but the proposed implementation takes into account the exponential nature of the fog in these calculations. The sky does get hidden by it if the camera is deep inside the fog, but as the camera emerges, the sky becomes visible.
+
+The proposed solution also looks more natural in this situation.
+
+### From Below
+
+#### No Fog
+![Screenshot from below, No fog](screenshots/low_no_fog.webp)
+#### Original Fog
+![Screenshot from below, Old fog](screenshots/low_old_fog.webp)
+#### Proposed Implementation
+![Screenshot from below, New fog](screenshots/low_new_fog.webp)
+
+#### Notes
+
+This is the scenario that better shows the problems with the existing implementation.
+
+The fog is exactly as strong on the terrain close to the camera as it is on the terrain far away. In fact, it doesn't matter how close we move the camera to the terrain, the fog remains the same.
+
+Compare that to the proposed solution: fog is weak in the foreground and gets quite strong in the background.
+
+The proposed solution also affects the sky more on this image, then in the previous one, because the camera is deeper in the fog.
+
+## Parameters
+
+The previous photos can be replicated by running this demo project with the default scene and using on of the two provided camera as *current* camera. Also apply the fog parameters from below.
+
+Fog parameters for old fog:
+```
+fog_enabled = true
+fog_light_color = Color(0.517647, 0.635294, 0.607843, 1)
+fog_sun_scatter = 0.48
+fog_density = 0.0
+fog_height = 197.74
+fog_height_density = 0.005
+```
+
+Fog parameters for the new fog:
+```
+fog_enabled = true
+fog_light_color = Color(0.517647, 0.635294, 0.607843, 1)
+fog_sun_scatter = 0.48
+fog_density = 0.0
+fog_height = 42.37
+fog_height_density = 0.01
+```

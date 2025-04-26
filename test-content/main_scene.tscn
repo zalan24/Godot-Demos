@@ -50,4 +50,7 @@ mesh = SubResource("PlaneMesh_0f027")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.749938, 0, 0.661508, 0, 1, 0, -0.661508, 0, -0.749938, 997.615, 318.097, -1435)
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(-0.0826861, 0, -0.996576, 0, 1, 0, 0.996576, 0, -0.0826861, 1009.92, 126.85, 645.782)
 current = true
