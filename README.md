@@ -50,7 +50,7 @@ $$fog\_density\left(p\right) = e^{-(p_y-base\_height)*h\_falloff}*base\_density$
 
 Where *p* is the world-space position; *base_height* is a parameter of the fog, a reference height to offset the fog along Y; *h_falloff* is a parameter that changes how quickly the density changes as we move along Y; *base_density* determines the density at the *base_height*.
 
-1 unit of *density* reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
+1 unit of *density* over a meter (unit distance) reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
 
 The distribution of density along the view ray is not important, only the total density (the integral) is.
 
