@@ -137,4 +137,5 @@ fog_sun_scatter = 0.48
 fog_density = 0.0
 fog_height = 42.37
 fog_height_density = 0.01
+fog_height_falloff = 0.02
 ```
