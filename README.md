@@ -32,7 +32,6 @@ Features (existing):
 Missing:
 * Implementations for other rendering modes
 * Deciding how this feature should be integrated (Should it replace fully the existing exp height fog? Can it be applied at the same time as normal fog?)
-* Edit fog parameters based on the previous point
 * Clean up the code
 
 ## Why This Change?
@@ -45,7 +44,7 @@ The solution that I present here is very similar to how [Unreal Engine does it f
 
 ## Math
 
-Full fog density:
+Exponential height fog density:
 $$fog\_density\left(p\right) = e^{-(p_y-base\_height)*h\_falloff}*base\_density$$
 
 Where *p* is the world-space position; *base_height* is a parameter of the fog, a reference height to offset the fog along Y; *h_falloff* is a parameter that changes how quickly the density changes as we move along Y; *base_density* determines the density at the *base_height*.
