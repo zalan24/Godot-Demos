@@ -47,7 +47,7 @@ The solution that I present here is very similar to how [Unreal Engine does it f
 Exponential height fog density:
 $$fog\_density\left(p\right) = e^{-(p_y-base\_height)*h\_falloff}*base\_density$$
 
-Where *p* is the world-space position; *base_height* is a parameter of the fog, a reference height to offset the fog along Y; *h_falloff* is a parameter that changes how quickly the density changes as we move along Y; *base_density* determines the density at the *base_height*.
+Where the world-space Y axis points upwards (the *.y* component is the height); *p* is a world-space position; The fog density is *base_density* at at any point at *base_height* on the Y axis; *h_falloff* is a multiplier on how quickly the density increases/decreases over the Y axis. *h_falloff* can be negative for inverse effect, and 0 for constant fog.
 
 1 unit of *density* over a meter (unit distance) reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
 
@@ -74,7 +74,45 @@ exp(-base\_density * (\frac{e^{(base\_height-o_y)*h\_falloff} - e^{(base\_height
 
 Where *o* is the the origin of the view ray; *v* is the view ray's normalized direction; and *L* is the view ray's length.
 
-The above expression can be used if the *v.y* value is not zero. If it is, meaning that the view ray is horizontal, the fog density is constant over distance, so the simple exponential fog formula can be used (already implemented in Godot).
+The above expression can be used if the *v.y\*h\_falloff* value is not zero. If it is, meaning that the view ray is horizontal or the h_falloff is 0, the fog density is constant along the given ray, so the simple exponential fog formula can be used:
+
+```math
+exp(-base\_density * \int_0^L const\_density \,dt) =
+```
+```math
+exp(-base\_density * L * const\_density)
+```
+
+Where:
+```math
+const\_density = e^{-(o_y-base\_height)*h\_falloff}
+```
+
+### Sky
+
+In case of the sky, the ray extends to infinity. The previous calculation do work as long if the fog exponentially decreases along the ray. Otherwise, the inner integral would be infinite &#8594; the the transparency as a whole converges to 0.
+
+```math
+fog\_transparency(o, v, \infty) = exp(-\int_0^\infty fog\_density\left(o+v*t\right) \,dt) =
+```
+```math
+exp(-\int_0^\infty e^{-(o_y+v_y*t-base\_height)*h\_falloff}*base\_density \,dt) =
+```
+```math
+exp(-base\_density * \int_0^\infty e^{(base\_height-o_y-v_y*t)*h\_falloff} \,dt) =
+```
+```math
+exp(-base\_density * \frac{e^{(base\_height-o_y-v_y*0)*h\_falloff}}{v_y*h\_falloff}) =
+```
+```math
+exp(-base\_density * \frac{e^{(base\_height-o_y)*h\_falloff}}{v_y*h\_falloff})
+```
+
+The above expression is valid if the *v_y\*h\_falloff > 0*, that is, the density decreases exponentially along the ray. Otherwise:
+
+```math
+fog\_transparency(o, v, \infty) = 0
+```
 
 ## Screenshots
 
