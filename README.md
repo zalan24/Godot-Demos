@@ -1,6 +1,20 @@
 # Exponential Height Fog Demo
 
-The implementation can be found on my Godot-fork as a feature branch: https://github.com/zalan24/godot/tree/feature-exp-height-fog
+The implementation can be found on my Godot fork as a feature branch: https://github.com/zalan24/godot/tree/feature-exp-height-fog
+
+## Running the Project
+
+Since this project is a demo of a custom fork of Godot, you'll a dev environment for building Godot. Check [this guide](https://docs.godotengine.org/en/stable/contributing/development/compiling/index.html) on how to set it up.
+
+```shell
+$ git clone -b exp-height-fog --recurse-submodules https://github.com/zalan24/Godot-Demos.git
+$ cd Godot-Demos/godot
+$ scons target=editor
+$ cd bin
+$ ./godot.<build-variant>
+```
+
+From the Godot editor, open the `Godot-Demos/test-content`.
 
 ## What is Exponential Height Fog?
 
