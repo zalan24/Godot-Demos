@@ -25,14 +25,13 @@ This feature is currently in prototype/demo state. It shows what results can be 
 
 Features (existing):
 * Analytical exp height fog calculations for correct fog density
-* Applied to scenes (forward+ mode only)
-* Applied to skies (forward+ mode only)
+* Applied to scenes
+* Applied to skies
 * Good performance (fog is calculated with a simple closed formula, no sampling/iterations required)
 
 Missing:
-* Implementations for other rendering modes
-* Deciding how this feature should be integrated (Should it replace fully the existing exp height fog? Can it be applied at the same time as normal fog?)
 * Clean up the code
+* Measure performance & optimize
 
 ## Why This Change?
 
