@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ProfilerConfig" load_steps=2 format=3 uid="uid://cf023xesjhqno"]
+
+[ext_resource type="Script" uid="uid://c6huf8a4jv5l3" path="res://Profiler/profiler_config.gd" id="1_ovdn1"]
+
+[resource]
+script = ExtResource("1_ovdn1")
+configName = "Default"
+variants = Array[String](["Off", "On"])
+referenceVariant = "Off"
+metadata/_custom_type_script = "uid://c6huf8a4jv5l3"

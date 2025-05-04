@@ -11,7 +11,8 @@
         "Octree",
         "onready",
         "perlin",
-        "texel"
+        "texel",
+        "vsync"
     ],
     "editor.insertSpaces": false
 }

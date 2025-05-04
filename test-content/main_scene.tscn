@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpbm1847701pb"]
+[gd_scene load_steps=8 format=3 uid="uid://cpbm1847701pb"]
 
 [ext_resource type="PackedScene" uid="uid://66c73hrdbstt" path="res://FreeCamera/free_camera.tscn" id="1_0f027"]
 [ext_resource type="Material" uid="uid://c42xia0d58ydg" path="res://terrain_material.tres" id="2_2c62f"]
+[ext_resource type="PackedScene" uid="uid://cdq4nfhutxj21" path="res://Profiler/profiler_gui.tscn" id="3_gyfs4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o3jxj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -21,7 +22,6 @@ fog_sun_scatter = 0.48
 fog_density = 0.0
 fog_height = 42.37
 fog_height_density = 0.01
-fog_height_falloff = 0.02
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0f027"]
 subdivide_width = 1000
@@ -55,3 +55,5 @@ transform = Transform3D(-0.749938, 0, 0.661508, 0, 1, 0, -0.661508, 0, -0.749938
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(-0.0826861, 0, -0.996576, 0, 1, 0, 0.996576, 0, -0.0826861, 1009.92, 126.85, 645.782)
 current = true
+
+[node name="ProfilerGUI" parent="." instance=ExtResource("3_gyfs4")]
