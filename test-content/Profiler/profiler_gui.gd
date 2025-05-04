@@ -103,12 +103,14 @@ func _refresh_profiler_variants(config: ProfilerConfig):
 	if config != null:
 		for variant in config.variants:
 			profiler_config_variant_option_button.add_item(variant)
+	profiler_config_variant_option_button.selected = 0
 
 func _on_profiler_config_selected(item: int):
 	var config = ProfilerService.profilerConfigs.configs[item] if item >= 0 else null
 	if config != last_config_selected:
 		_refresh_profiler_variants(config)
 		last_config_selected = config
+		ProfilerService.clear()
 
 func _on_profiler_variant_selected(item: int):
 	if item == 0 || item == -1 || profiler_config_option_button.selected == -1:
