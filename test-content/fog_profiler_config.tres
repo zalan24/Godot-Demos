@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ProfilerConfig" load_steps=2 format=3 uid="uid://cga2iava2yfn2"]
+
+[ext_resource type="Script" uid="uid://c6huf8a4jv5l3" path="res://Profiler/profiler_config.gd" id="1_mjs5q"]
+
+[resource]
+script = ExtResource("1_mjs5q")
+configName = "Fog"
+variants = Array[String](["Off", "No-height", "On"])
+referenceVariant = "Off"
+metadata/_custom_type_script = "uid://c6huf8a4jv5l3"

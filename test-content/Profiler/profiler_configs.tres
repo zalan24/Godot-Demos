@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ProfilerConfigSet" load_steps=4 format=3 uid="uid://petydnsgoaov"]
+[gd_resource type="Resource" script_class="ProfilerConfigSet" load_steps=5 format=3 uid="uid://petydnsgoaov"]
 
 [ext_resource type="Script" uid="uid://c6huf8a4jv5l3" path="res://Profiler/profiler_config.gd" id="1_in4bh"]
 [ext_resource type="Resource" uid="uid://cf023xesjhqno" path="res://Profiler/default_profiler_config_on_off.tres" id="2_4gglp"]
 [ext_resource type="Script" uid="uid://bv8wlok5v2a1p" path="res://Profiler/profiler_config_set.gd" id="2_lt1iv"]
+[ext_resource type="Resource" uid="uid://cga2iava2yfn2" path="res://fog_profiler_config.tres" id="3_4gglp"]
 
 [resource]
 script = ExtResource("2_lt1iv")
-configs = Array[ExtResource("1_in4bh")]([ExtResource("2_4gglp")])
+configs = Array[ExtResource("1_in4bh")]([ExtResource("2_4gglp"), ExtResource("3_4gglp")])
 metadata/_custom_type_script = "uid://bv8wlok5v2a1p"
