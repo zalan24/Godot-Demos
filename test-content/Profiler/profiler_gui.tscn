@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdq4nfhutxj21"]
+
+[ext_resource type="Script" uid="uid://10v8036qv5eg" path="res://Profiler/profiler_gui.gd" id="1_4ivqk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ivqk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ProfilerGUI" type="Node2D"]
+script = ExtResource("1_4ivqk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ivqk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "FPS: 999.9"
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="VSyncCheckBox" type="CheckBox" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "VSync"
+
+[node name="VSyncMode" type="OptionButton" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Normal"
+popup/item_0/id = 1
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 2
+popup/item_2/text = "Mailbox"
+popup/item_2/id = 3
+
+[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Profiler Config:"
+
+[node name="ProfilerConfigOption" type="OptionButton" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ProfilerConfigVariantOption" type="OptionButton" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Measure" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Measure"
+
+[node name="StopMeasurement" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Stop"
+
+[node name="ActiveVariantLabel" type="Label" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2

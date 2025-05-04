@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpbm1847701pb"]
+[gd_scene load_steps=10 format=3 uid="uid://cpbm1847701pb"]
 
 [ext_resource type="PackedScene" uid="uid://66c73hrdbstt" path="res://FreeCamera/free_camera.tscn" id="1_0f027"]
+[ext_resource type="PackedScene" uid="uid://cdq4nfhutxj21" path="res://Profiler/profiler_gui.tscn" id="2_2c62f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o3jxj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -206,3 +207,5 @@ skeleton = NodePath("../../Column2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Obstacles/Column15"]
 shape = SubResource("BoxShape3D_2c62f")
+
+[node name="ProfilerGUI" parent="." instance=ExtResource("2_2c62f")]
