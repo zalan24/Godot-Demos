@@ -196,7 +196,7 @@ fog_height_falloff = 0.02
 |-----------------|---------------------------|
 |OS               |Ubuntu 24.04 LTS           |
 |GPU              |NVIDIA GeForce RTX™ 4060 Ti|
-|CPU              |AMD Ryzen 9 7900X          |
+|CPU              |AMD Ryzen™ 9 7900X         |
 |RAM              |32 GiB                     |
 |Screen           |Full HD                    |
 |Anti-Aliasing    |SSAA x2                    |
