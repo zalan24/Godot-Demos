@@ -189,3 +189,27 @@ fog_height = 42.37
 fog_height_density = 0.01
 fog_height_falloff = 0.02
 ```
+
+## Performance
+
+|Testing equipment|                           |
+|-----------------|---------------------------|
+|OS               |Ubuntu 24.04 LTS           |
+|GPU              |NVIDIA GeForce RTX™ 4060 Ti|
+|CPU              |AMD Ryzen 9 7900X          |
+|RAM              |32 GiB                     |
+|Screen           |Full HD                    |
+|Anti-Aliasing    |SSAA x2                    |
+
+The performance was measured from the upper camera position (using the Camera3D node placed on the scene), in windowed mode, but maximized to full screen. VSync was turned off during the measurement.
+I've used SSAA (x2) to make the pixel shaders slower in order to reduce noise in the measurements.
+
+### Results
+
+|        Configuration|              Result|                            Notes|
+|---------------------|--------------------|---------------------------------|
+|No fog:              |frame time = 2.824ms|reference value                  |
+|Normal fog only:     |+33us               |                                 |
+|Original height fog: |+40us               |                                 |
+|New height fog:      |+49us               |**+9us** compared to the original|
+
