@@ -1,10 +1,31 @@
 # Exponential Height Fog Demo
 
-The implementation can be found on my Godot fork as a feature branch: https://github.com/zalan24/godot/tree/feature-exp-height-fog
+This is a demo project. The feature itself is implemented in my Godot fork as a feature branch: https://github.com/zalan24/godot/tree/feature-exp-height-fog
+
+## Current State
+
+This feature is currently in prototype/demo state. It shows what results can be achieved, but the implementation is not final.
+
+Features (existing):
+* Analytical exp height fog calculations for correct fog density
+* Applied to scenes
+* Applied to skies
+* Good performance (fog is calculated with a simple closed formula, no sampling/iterations required)
+
+Missing:
+* Deciding how it should interact with existing fog options:
+	<ol type="a">
+		<li>Replace original height fog and complement constant fog (currently implemented)</li>
+		<li>Use it as a new fog type, preserving all existing functionality (all could be active at the same time)</li>
+		<li>Any other option...</li>
+	</ol
+* Cleaning up & finalizing the code
 
 ## Running the Project
 
-Since this project is a demo of a custom fork of Godot, you'll a dev environment for building Godot. Check [this guide](https://docs.godotengine.org/en/stable/contributing/development/compiling/index.html) on how to set it up.
+You'll to set up a dev environment for building Godot. Check [this guide](https://docs.godotengine.org/en/stable/contributing/development/compiling/index.html) on how to do it.
+
+Then follow these steps:
 
 ```shell
 $ git clone -b exp-height-fog --recurse-submodules https://github.com/zalan24/Godot-Demos.git
@@ -18,7 +39,7 @@ From the Godot editor, open the `Godot-Demos/test-content`.
 
 ## What is Exponential Height Fog?
 
-It's a simple type of fog, where the density is calculated based on world-y position. As we move up along the Y (up) axis, the fog exponentially gets lower. It resembles how the atmosphere's density decreases.
+It's a simple type of fog, where the density is calculated based on world-y position. As we move up along the Y (up) axis, the fog exponentially gets thinner. It resembles how the atmosphere's density decreases.
 
 Simplified density model:
 ```math
@@ -27,42 +48,26 @@ simple\_fog\_density\left(pos\right) = e^{-pos_y}*base\_density
 
 It is a very useful and simple tool, which can achieve really nice results at a very low performance cost.
 
-Exp height fog can be applied to the sky naturally. It won't produce a visible contour between far terrain and the sky behind, but it will also leave the sky visible through the fog.
+Godot can only achieve the same effect using volumetric fog, which comes as a large performance cost and strict limitations (fog volume size).
 
-Exponential height fog is a great alternative to volumetric fog, in case the range or performance is important. It can be especially useful in case of large open world maps. It can render really nice fog at large distances at a very low performance cost.
-
-In order achieve good performance, it has some limitations. It can't use the height-above-terrain, as that would lack a simple analytical solution to the fog density between the camera and a point in the world. Since no iteration or sampling is used, it also can't use shadows. It won't produce godrays.
-
-## Current State
-
-This feature is currently in prototype/demo state. It shows what results can be achieved, but the implementation is not final.
-
-Features (existing):
-* Analytical exp height fog calculations for correct fog density
-* Applied to scenes
-* Applied to skies
-* Good performance (fog is calculated with a simple closed formula, no sampling/iterations required)
-
-Missing:
-* Clean up the code
-* Measure performance & optimize
+Considering how effective and widely useful the exponential height fog is, it should be a built-in feature in any 3D game engine.
 
 ## Why This Change?
 
-Godot does have a built in exp height fog already, but it works in a different way. The existing solution computes the strength of the fog on a given pixel based on the world-y position of that pixel. It's completely independent of the pixel's distance from the camera or the direction of the view ray. This solution looks surprisingly well when looked at from above, but falls apart as the camera enters the fog.
+Godot does have a built in exp height fog already, but it is something different. It works in a different way and produces different results. The original at the proposed fog type do look surprisingly similar from a distance as long as the camera stays above the thick part of the fog. On the other hand, close-ups of the original fog look quite bad.
 
-In a nutshell, the built-in solution uses the fog density at a pixel's world position directly as the fog strength applied to that pixel on the screen. My solution simply integrates the fog density along the ray between the camera and the pixel's world position to calculate the fog strength. This way, the fog gets stronger with distance.
+In a nutshell, the proposed solution integrates the fog density along the ray between the camera and the pixel's world position to calculate the fog strength. This way, the fog gets stronger with distance. This calculation can be done with a simple closed formula, so barely any performance is sacrificed for a significant visual impact (check the screenshots and the performance results later in this document).
 
-The solution that I present here is very similar to how [Unreal Engine does it for example](https://dev.epicgames.com/documentation/en-us/unreal-engine/exponential-height-fog-user-guide?application_version=4.27).
+The solution that I present here is very similar to how [Unreal Engine does it](https://dev.epicgames.com/documentation/en-us/unreal-engine/exponential-height-fog-user-guide?application_version=4.27).
 
 ## Math
 
 Exponential height fog density:
 $$fog\_density\left(p\right) = e^{-(p_y-base\_height)*h\_falloff}*base\_density$$
 
-Where the world-space Y axis points upwards (the *.y* component is the height); *p* is a world-space position; The fog density is *base_density* at at any point at *base_height* on the Y axis; *h_falloff* is a multiplier on how quickly the density increases/decreases over the Y axis. *h_falloff* can be negative for inverse effect, and 0 for constant fog.
+Where the world-space Y axis points upwards; *p* is a world-space position; The fog density is *base_density* at at any point at *base_height* on the Y axis; *h_falloff* is a multiplier on how quickly the density increases/decreases over the Y axis. *h_falloff* can be negative for inverse effect, and 0 for constant fog.
 
-1 unit of *density* over a meter (unit distance) reduces transparency (percentage of light that gets through) to *1/e = exp(-1)*.
+1 unit of *density* over a meter (unit distance) reduces transparency (percentage of light that gets through) to the fraction of *1/e = exp(-1)* or *~36.78794412%*. This definition is consistent with the built-in exponential fog.
 
 The distribution of density along the view ray is not important, only the total density (the integral) is.
 
@@ -167,9 +172,9 @@ The proposed solution also affects the sky more on this image, then in the previ
 
 ## Parameters
 
-The previous photos can be replicated by running this demo project with the default scene and using on of the two provided camera as *current* camera. Also apply the fog parameters from below.
+The previous photos can be replicated by running this demo project with the default scene and using on of the two provided camera as *current camera*. Also apply the fog parameters from below.
 
-Fog parameters for old fog:
+Fog parameters for the original fog (use Godot without my change for this):
 ```
 fog_enabled = true
 fog_light_color = Color(0.517647, 0.635294, 0.607843, 1)
@@ -198,13 +203,11 @@ fog_height_falloff = 0.02
 |GPU              |NVIDIA GeForce RTX™ 4060 Ti|
 |CPU              |AMD Ryzen™ 9 7900X         |
 |RAM              |32 GiB                     |
-|Screen           |Full HD                    |
-|Anti-Aliasing    |SSAA x2                    |
 
 The performance was measured from the upper camera position (using the Camera3D node placed on the scene), in windowed mode, but maximized to full screen. VSync was turned off during the measurement.
 I've used SSAA (x2) to make the pixel shaders slower in order to reduce noise in the measurements.
 
-### Results
+### Results (Full HD with SSAA x2)
 
 |        Configuration|              Result|                            Notes|
 |---------------------|--------------------|---------------------------------|
@@ -213,3 +216,4 @@ I've used SSAA (x2) to make the pixel shaders slower in order to reduce noise in
 |Original height fog: |+40us               |                                 |
 |New height fog:      |+49us               |**+9us** compared to the original|
 
+**In Full HD without SSAA**, using the same setup, the performance overhead of my implementation compared to the original height fog is about **2-3us**.
